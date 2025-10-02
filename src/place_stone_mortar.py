@@ -142,8 +142,6 @@ def convert_mesh_to_image(stone_mesh,image_size,pitch = 1, add_minimum_ball = Tr
     
     return stone_image
 
-from scipy.spatial import ConvexHull, QhullError
-from shapely.geometry import Point, Polygon
 
 
 
