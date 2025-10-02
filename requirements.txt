@@ -1,0 +1,8 @@
+scikit-image
+opencv-python
+trimesh
+numpy
+open3d
+scikit-learn
+plyfile
+python-fcl
