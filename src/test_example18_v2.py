@@ -9,6 +9,15 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+import argparse
+
+# read from arguments
+parser = argparse.ArgumentParser(description="Process dataset ID.")
+parser.add_argument("--dataID", type=str, default="18",
+                    help="The ID of the dataset (default: 18)")
+args = parser.parse_args()
+
+
 def sort_stones_by_volume(stones):
     sequence = stones.keys()
     sequence = [x for _,x in sorted(zip([stones[i]['mesh'].volume for i in sequence],sequence),reverse=True)]
@@ -29,7 +38,7 @@ def read_new_stones(data_dir,placed_ids = []):
             # read mesh file
             mesh = trimesh.load(file_dir)
             # scale the mesh
-            scale = 100
+            scale = 1
             mesh.apply_scale(scale)# !scale the mesh 1 times
             # move the mesh so that the min bounds are non-negative
             T = trimesh.transformations.translation_matrix(mesh.bounds[0]*-1)
@@ -129,11 +138,11 @@ def generate_from_placed_stones(layer_i,max_height,placed_stones_dir,available_s
     world_size = (int(world_size_meter[0]/pitch),int(world_size_meter[1]/pitch),int(world_size_meter[2]/pitch))
     #get the time date stamp
     time_stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    result_dir = f'../result/example18/wall_size_{world_size[0]}_{world_size[1]}_{world_size[2]}_timestamp_{time_stamp}'
+    result_dir = f"../result/example"+f"{args.dataID}/wall_size_{world_size[0]}_{world_size[1]}_{world_size[2]}_timestamp_{time_stamp}"
     if not os.path.exists('../result/'):
         os.mkdir('../result/')
-    if not os.path.exists('../result/example18/'):
-        os.mkdir('../result/example18')
+    if not os.path.exists("../result/example"+f"{args.dataID}/"):
+        os.mkdir("../result/example"+f"{args.dataID}")
     if not os.path.exists(result_dir):
         os.mkdir(result_dir)
     logging.basicConfig(filename=result_dir+'/log.txt', level=logging.DEBUG)
@@ -151,12 +160,12 @@ def generate_from_placed_stones(layer_i,max_height,placed_stones_dir,available_s
 if __name__ == '__main__':
     layer_i = 1
     max_height = 1
-    data_dir = "../data/example18/"
-    placed_stones_dir = "../data/example18/placed_stones_asbuilt/"
-    available_stones_dir = "../data/example18/available_stones_rot/"
+    data_dir = "../data/example"+f"{args.dataID}/"
+    placed_stones_dir = "../data/example"+f"{args.dataID}/placed_stones_asbuilt/"
+    available_stones_dir = "../data/example"+f"{args.dataID}/available_stones_rot/"
     #world_size_meter = (100,200,125)
     world_size_meter = (70+1,70+2,40+2)
-    ground_mesh_dir = "../data/example18/ground_bound/"
+    ground_mesh_dir = "../data/example"+f"{args.dataID}/ground_bound/"
     pitch = 1
 
     

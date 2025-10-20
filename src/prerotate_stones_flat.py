@@ -4,17 +4,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import Normalize
 from scipy.spatial.distance import cdist,pdist
+import argparse
 
+# read from arguments
+parser = argparse.ArgumentParser(description="Process dataset ID and mesh type.")
+parser.add_argument("--dataID", type=str, default="18",
+                    help="The ID of the dataset (default: 18)")
+args = parser.parse_args()
 
-start_time = time.time()
 # Input and output folder
-available_stones_dir = "../data/example18/available_stones/"
-output_dir= "../data/example18/available_stones_rot/"
+available_stones_dir = f"../data/example{args.dataID}/available_stones/"
+output_dir= f"../data/example{args.dataID}/available_stones_rot/"
 if not os.path.exists(output_dir):
     os.mkdir(output_dir)
 
 # Iterate all stones in the input folder with id from 0 to 150
-for stone_i in range(147,170):
+for stone_i in range(0,170):
     # Find S000.obj
     stone_number = f"{stone_i:0{3}d}"
     print("Stone ",stone_number)

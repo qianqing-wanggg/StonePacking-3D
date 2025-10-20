@@ -146,6 +146,7 @@ def convert_mesh_to_image(stone_mesh,image_size,pitch = 1, add_minimum_ball = Tr
 
 
 def add_stone_3d(wall, wall_other_matrix,stone_mesh,p=None,relaxed_mason_criteria = False,pitch = 1):
+    print("line149")
     global left_bound_pixel_value,right_bound_pixel_value,global_result_dir
 
     wall_seg_matrix = wall_other_matrix['wall_seg_matrix']
@@ -155,7 +156,9 @@ def add_stone_3d(wall, wall_other_matrix,stone_mesh,p=None,relaxed_mason_criteri
     interlocking_distance_3 = wall_other_matrix['interlocking_distance_3']
 
     #voxelize the mesh
+    print("line159")
     stone_matrix = voxelize_mesh(stone_mesh,pitch = pitch)
+    print("line161")
     stone_matrix = stone_matrix[0]
     # compute kernel for convolution
     brick_bounding_box_matrix = stone_matrix

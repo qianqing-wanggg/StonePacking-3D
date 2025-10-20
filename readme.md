@@ -19,8 +19,8 @@ pip install -r requirements.txt
 ## Examples
 ### Example 18
 ```bash
-python prerotate_stones_flat
-python test_example18_v2
+python prerotate_stones_flat.py --dataID 18
+python test_example18_v2.py --dataID 18
 ```
 
 # Reference
